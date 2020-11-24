@@ -6,21 +6,52 @@
 
 void Game::initWindow()
 {
-	this->window = new sf::RenderWindow(sf::VideoMode(800, 600, 32), "SFML Empty Project");
+    //Make window with option from .ini file 
+    std::ifstream fileStream("Config/window.ini");
+
+    std::string title = "Error missing window.ini file";
+    sf::VideoMode windowSize(800, 600);
+    unsigned framerateLimit = 120;
+    bool verticalSyncEnabled = false;
+
+    if (fileStream.is_open())
+    {
+        std::getline(fileStream, title);
+        fileStream >> windowSize.width >> windowSize.height;
+        fileStream >> framerateLimit;
+        fileStream >> verticalSyncEnabled;
+        fileStream.close();
+    }
+    else
+    {
+        std::cout << "Windows config file missing, need a file named Config/window.ini\n";
+    }
+    
+	this->window = new sf::RenderWindow(windowSize, title);
+    this->window->setFramerateLimit(framerateLimit);
+    this->window->setVerticalSyncEnabled(verticalSyncEnabled);
 }
 
 //Constructs Destructs
-Game::Game()
+Game::Game() //construct
 {
     this->initWindow();
 }
 
-Game::~Game()
+Game::~Game() //destruct
 {
 	delete this->window;
 }
 
 //Functions
+
+void Game::updateDt()
+{
+    this->dt = this->dtClock.restart().asSeconds();
+
+    //system("cls"); See how much time it takes to update
+    //std::cout << this->dt << "\n";
+}
 
 void Game::updateSFMLEvents()
 {
@@ -49,6 +80,7 @@ void Game::run()
 {
     while (this->window->isOpen())
     {
+        this->updateDt();
         this->update();
         this->render();
     }

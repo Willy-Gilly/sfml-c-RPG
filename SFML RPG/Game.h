@@ -1,20 +1,15 @@
 #pragma once
-#include<iostream>
-#include<ctime>
-#include<cstdlib>
 
-#include"SFML/System.hpp"
-#include"SFML/Window.hpp"
-#include"SFML/Graphics.hpp"
-#include"SFML/Audio.hpp"
-#include"SFML/Network.hpp"
-
+#include"State.h"
 class Game
 {
 	private:
 		//Variables
 		sf::RenderWindow *window;
 		sf::Event sfEvent;
+
+		sf::Clock dtClock;
+		float dt; //Delta time calculating how long does it take to update and render
 
 		//Init
 		void initWindow();
@@ -25,6 +20,7 @@ class Game
 		virtual ~Game();
 
 		//Functions
+		void updateDt();
 		void updateSFMLEvents();
 		void update();
 		void render();
