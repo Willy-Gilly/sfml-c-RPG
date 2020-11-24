@@ -83,6 +83,18 @@ void Game::update()
     if (!this->states.empty())
     {
         this->states.top()->update(this->dt); // Update the state at top.
+        //But if we want to quit the state : 
+        if (this->states.top()->getQuit())
+        {
+            this->states.top()->endState();
+            delete this->states.top(); // We delete the item from memory
+            this->states.pop(); //Then we remove it from the stack (list)
+        }
+    }
+    else // Game close
+    {
+        this->endApplication();
+        this->window->close();
     }
 }
 
@@ -106,4 +118,9 @@ void Game::run()
         this->update();
         this->render();
     }
+}
+
+void Game::endApplication()
+{
+    std::cout << "Closing game!\n";
 }

@@ -10,11 +10,18 @@ GameState::~GameState()
 
 void GameState::endState()
 {
+	std::cout << "Ending GameState\n";
+}
+
+void GameState::updateKeybinds(const float& dt)
+{
+	this->checkForQuit();
 }
 
 void GameState::update(const float& dt)
 {
-	std::cout << "Hello im gamestate.cpp\n";
+	this->updateKeybinds(dt);
+	
 }
 
 void GameState::render(sf::RenderTarget* target)

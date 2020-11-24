@@ -20,12 +20,16 @@ class State
 	private:
 		sf::RenderWindow* window;
 		std::vector<sf::Texture> textures;
+		bool quit;
 	public:
 		State(sf::RenderWindow* window);
 		virtual ~State();
 
+		const bool& getQuit() const;
+		virtual void checkForQuit();
 		virtual void endState() = 0;
 
+		virtual void updateKeybinds(const float& dt) = 0;
 		virtual void update(const float& dt) = 0; //Virtual est l'équivalent des abstract qui doivent être définies impérativement dans la classe qui hérite de State
 		virtual void render(sf::RenderTarget* target = nullptr) = 0;
 };
