@@ -1,6 +1,6 @@
 #pragma once
 
-#include"State.h"
+#include"GameState.h"
 class Game
 {
 	private:
@@ -11,8 +11,11 @@ class Game
 		sf::Clock dtClock;
 		float dt; //Delta time calculating how long does it take to update and render
 
+		std::stack<State*> states; // state is abstract class
+
 		//Init
 		void initWindow();
+		void initStates();
 
 	public:
 		//Constructs / Destructs
