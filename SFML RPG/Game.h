@@ -13,10 +13,12 @@ class Game
 
 		std::stack<State*> states; // state is abstract class
 
+		std::map<std::string, int> supportedKeys;
+
 		//Init
 		void initWindow();
 		void initStates();
-
+		void initKeys();
 	public:
 		//Constructs / Destructs
 		Game();
