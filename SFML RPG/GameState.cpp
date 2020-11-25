@@ -2,16 +2,37 @@
 
 void GameState::initKeybinds()
 {
-	this->keybinds.emplace("moveUp", this->supportedKeys->at("Z"));
-	this->keybinds.emplace("moveDown", this->supportedKeys->at("S"));
-	this->keybinds.emplace("moveLeft", this->supportedKeys->at("Q"));
-	this->keybinds.emplace("moveRight", this->supportedKeys->at("D"));
+	std::ifstream ifs("Config/gameStateKeybinds.ini");
 
-	this->keybinds.emplace("moveUp2", this->supportedKeys->at("Up"));
-	this->keybinds.emplace("moveDown2", this->supportedKeys->at("Down"));
-	this->keybinds.emplace("moveLeft2", this->supportedKeys->at("Left"));
-	this->keybinds.emplace("moveRight2", this->supportedKeys->at("Right"));
+	if (ifs.is_open())
+	{
+		std::string key;
+		std::string keyValue;
 
+		while (ifs >> key >> keyValue)
+		{
+			this->keybinds[key] = this->supportedKeys->at(keyValue);
+		}
+	}
+	else
+	{
+		std::cout << "Problem with Config/gameStateKeybinds.ini file";
+	}
+	ifs.close();
+	/* Now keys are into "Config/gameStateKeybinds.ini" file
+	this->keybinds["close"] = this->supportedKeys->at("Escape");
+	this->keybinds["c"] = this->supportedKeys->at("C");
+
+	this->keybinds["moveUp"] = this->supportedKeys->at("Z");
+	this->keybinds["moveDown"] = this->supportedKeys->at("S");
+	this->keybinds["moveLeft"] = this->supportedKeys->at("Q");
+	this->keybinds["moveRight"] = this->supportedKeys->at("D");
+
+	this->keybinds["moveUp2"] = this->supportedKeys->at("Up");
+	this->keybinds["moveDown2"] = this->supportedKeys->at("Down");
+	this->keybinds["moveLeft2"] = this->supportedKeys->at("Left");
+	this->keybinds["moveRight2"] = this->supportedKeys->at("Right");
+	*/
 }
 
 GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys)

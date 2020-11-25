@@ -39,17 +39,45 @@ void Game::initStates()
 
 void Game::initKeys()
 {
-    this->supportedKeys.emplace("Escape", sf::Keyboard::Key::Escape);
+    std::ifstream ifs("Config/supportedKeys.ini");
 
-    this->supportedKeys.emplace("Z", sf::Keyboard::Key::Z);
-    this->supportedKeys.emplace("Q", sf::Keyboard::Key::Q);
-    this->supportedKeys.emplace("S", sf::Keyboard::Key::S);
-    this->supportedKeys.emplace("D", sf::Keyboard::Key::D);
+    if (ifs.is_open())
+    {
+        std::string key;
+        int keyValue;
 
-    this->supportedKeys.emplace("Up", sf::Keyboard::Key::Up);
-    this->supportedKeys.emplace("Down", sf::Keyboard::Key::Down);
-    this->supportedKeys.emplace("Left", sf::Keyboard::Key::Left);
-    this->supportedKeys.emplace("Right", sf::Keyboard::Key::Right);
+        while (ifs >> key >> keyValue)
+        {
+            this->supportedKeys[key] = keyValue;
+        }
+    }
+    else
+    {
+        std::cout << "Problem with Config/supportedKeys.ini file";
+    }
+    ifs.close();
+
+    /* All the keys are in supportedKeys.ini
+    * each line is "KeyName KeyValue"
+    this->supportedKeys["Escape"] = sf::Keyboard::Key::Escape;
+    this->supportedKeys["C"] = sf::Keyboard::Key::C;
+
+    this->supportedKeys["Z"] = sf::Keyboard::Key::Z;
+    this->supportedKeys["Q"] = sf::Keyboard::Key::Q;
+    this->supportedKeys["S"] = sf::Keyboard::Key::S;
+    this->supportedKeys["D"] = sf::Keyboard::Key::D;
+
+    this->supportedKeys["Up"] = sf::Keyboard::Key::Up;
+    this->supportedKeys["Down"] = sf::Keyboard::Key::Down;
+    this->supportedKeys["Left"] = sf::Keyboard::Key::Left;
+    this->supportedKeys["Right"] = sf::Keyboard::Key::Right;
+    */
+
+    //Debug lines
+    for (auto i : this->supportedKeys)
+    {
+        std::cout << i.first << " " << i.second << "\n";
+    }
 }
 
 //Constructs Destructs
