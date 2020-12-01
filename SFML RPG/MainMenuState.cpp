@@ -1,5 +1,13 @@
 #include "MainMenuState.h"
+#include "Button.h"
 
+void MainMenuState::initFonts()
+{
+	if (!this->font.loadFromFile("Fonts/pkmndp.ttf"))
+	{
+		throw("Error : couldn't lood ttf file ");
+	}
+}
 
 void MainMenuState::initKeybinds()
 {
@@ -17,7 +25,7 @@ void MainMenuState::initKeybinds()
 	}
 	else
 	{
-		std::cout << "Problem with Config/gameStateKeybinds.ini file";
+		throw("Problem with Config/gameStateKeybinds.ini file");
 	}
 	ifs.close();
 	/* Now keys are into "Config/gameStateKeybinds.ini" file
@@ -39,6 +47,7 @@ void MainMenuState::initKeybinds()
 MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys)
 	: State(window, supportedKeys)
 {
+	this->initFonts();
 	this->initKeybinds();
 	this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
 	this->background.setFillColor(sf::Color::Green);
@@ -62,7 +71,12 @@ void MainMenuState::update(const float& dt)
 {
 	this->updateInput(dt);
 
+	this->updateMousePosition();
 
+	system("cls"); //Clear console
+	std::cout << "pos view :" << this->mousePosView.x << "," << this->mousePosView.y <<
+		"\npos screen : " << this->mousePosScreen.x << "," << this->mousePosScreen.y <<
+		"\npos window : " << this->mousePosWindow.x << "," << this->mousePosWindow.y;
 }
 
 void MainMenuState::render(sf::RenderTarget* target)

@@ -1,2 +1,26 @@
-﻿  Game.cpp
+﻿  Button.cpp
+  Game.cpp
+  GameState.cpp
+  main.cpp
+  MainMenuState.cpp
+C:\Users\flamm\Desktop\SFML RPG\SFML RPG\SFML RPG\MainMenuState.cpp(43,78): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\flamm\Desktop\SFML RPG\SFML RPG\SFML RPG\MainMenuState.cpp(43,57): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+  State.cpp
+  Génération de code en cours...
   SFML RPG.vcxproj -> C:\Users\flamm\Desktop\SFML RPG\SFML RPG\Debug\SFML RPG.exe

@@ -16,7 +16,7 @@ void GameState::initKeybinds()
 	}
 	else
 	{
-		std::cout << "Problem with Config/gameStateKeybinds.ini file";
+		throw("Problem with Config/gameStateKeybinds.ini file");
 	}
 	ifs.close();
 	/* Now keys are into "Config/gameStateKeybinds.ini" file
@@ -79,6 +79,8 @@ void GameState::updateInput(const float& dt)
 
 void GameState::update(const float& dt)
 {
+	this->updateMousePosition();
+
 	this->updateInput(dt);
 
 	this->player.update(dt);

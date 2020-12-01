@@ -24,7 +24,7 @@ void Game::initWindow()
     }
     else
     {
-        std::cout << "Windows config file missing, need a file named Config/window.ini\n";
+        throw("Windows config file missing, need a file named Config/window.ini\n");
     }
     
 	this->window = new sf::RenderWindow(windowSize, title);
@@ -35,7 +35,7 @@ void Game::initWindow()
 void Game::initStates()
 {
     this->states.push(new MainMenuState(this->window, &this->supportedKeys));
-    this->states.push(new GameState(this->window, &this->supportedKeys));
+    //this->states.push(new GameState(this->window, &this->supportedKeys));
 }
 
 void Game::initKeys()
@@ -54,7 +54,7 @@ void Game::initKeys()
     }
     else
     {
-        std::cout << "Problem with Config/supportedKeys.ini file";
+        throw("Problem with Config/supportedKeys.ini file");
     }
     ifs.close();
 
