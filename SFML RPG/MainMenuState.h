@@ -1,17 +1,18 @@
 #pragma once
-#include "State.h"
-
-class GameState : public State
+#include "GameState.h"
+class MainMenuState : public State
 {
 private:
-	Entity player;
+	//Variables
+
+	sf::RectangleShape background;
 
 	//Functions
 	void initKeybinds();
 public:
 	//Construct Destruct
-	GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys);
-	virtual ~GameState();
+	MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys);
+	virtual ~MainMenuState();
 
 	//Functions
 	void endState();
